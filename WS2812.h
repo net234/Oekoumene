@@ -4,21 +4,22 @@
 
 #pragma once
 #include <Arduino.h>
+#include "Nano.h"
 
-#define PIN_WS2812 2
+#define PIN_WS2812 D2
+
+enum e_rvb { rvb_white, rvb_red, rvb_green, rvb_blue, rvb_yellow, rvb_pink, rvb_brun, rvb_orange, rvb_black, MAX_e_rvb };
+
+
+
 
 struct  rvb_t {
   uint8_t Red;
   uint8_t Green;
   uint8_t Blue;
+  void  setcolor(const e_rvb color, const uint8_t level);
 };
-//struct  rvbw_t : rvb_t {
-//  uint8_t White;
-//};
 
-
-
-enum e_rvb { rvb_white,rvb_red,rvb_green,rvb_blue,rvb_yellow,rvb_pink,rvb_brun,rvb_orange,rvb_black,MAX_e_rvb };
 const rvb_t map_color[MAX_e_rvb] = {
   {255, 255, 255}, // rvb_white
   {255,   0,   0}, // rvb_red
@@ -31,8 +32,12 @@ const rvb_t map_color[MAX_e_rvb] = {
   {  0,   0,   0}   // rvb_black
 };
 
-void  WS2812Reset();
-void  WS2812Write(const rvb_t &color);
-//void  WS2812Write(const rvbw_t &color);
-//void  setcolor(rvbw_t &rbv_s, const e_rvb color, const int level); 
-void  setcolor(rvb_t &rbv_s, const e_rvb color, const int level); 
+
+struct WS2812rvb_t : rvb_t {
+  void  reset();
+  void  write();
+  private:
+  void shift(uint8_t color);
+  //void  WS2812Write(const rvbw_t &color);
+  //void  setcolor(rvbw_t &rbv_s, const e_rvb color, const int level);
+};

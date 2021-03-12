@@ -32,7 +32,7 @@ void WS2812_HIGH() {
 }
 
 
-void  WS2812Reset() {
+void  WS2812rvb_t::reset() {
   interrupts();
   pinMode(PIN_WS2812, OUTPUT);
   WS2812_LOW();
@@ -47,7 +47,7 @@ void  WS2812Reset() {
 
 
 
-void WS2812Shift( uint8_t shift) {
+void WS2812rvb_t::shift( uint8_t shift) {
   static uint8_t delay1 = 0;
   static uint16_t delay2 = 0;
 
@@ -66,11 +66,11 @@ void WS2812Shift( uint8_t shift) {
 
 }
 
-void  WS2812Write(const rvb_t& color) {
+void  WS2812rvb_t::write() {
   noInterrupts();
-  WS2812Shift(color.Green);
-  WS2812Shift(color.Red);
-  WS2812Shift(color.Blue);
+  this->shift(this->Green);
+  this->shift(this->Red);
+  this->shift(this->Blue);
 }
 //void  WS2812Write(const rvbw_t &color) {
 //  WS2812Write((rvb_t&)color);
@@ -78,21 +78,20 @@ void  WS2812Write(const rvb_t& color) {
 //}
 
 
-void  setcolor(rvb_t &rvb_led, const e_rvb color, const int level)  {
-  float pcent =  float(level) / 100 ;
-  rvb_led.Red =   floor(map_color[color].Red * pcent);
-  rvb_led.Green = floor(map_color[color].Green * pcent);
-  rvb_led.Blue =  floor(map_color[color].Blue * pcent);
+void  rvb_t::setcolor( const e_rvb color, const uint8_t level)  {
+  this->Red =   (uint16_t)map_color[color].Red * level / 100;
+  this->Green = (uint16_t)map_color[color].Green * level / 100;
+  this->Blue =  (uint16_t)map_color[color].Blue * level / 100;
 }
-void  setcolor(rvbw_t &rvb_led, const e_rvb color, const int level)  {
-  setcolor( (rvb_t&)rvb_led, color, level );
-//  float pcent =  float(level) / 100 ;
-//  rvb_led.Red =   floor(map_color[color].Red * pcent);
-//  rvb_led.Green = floor(map_color[color].Green * pcent);
-//  rvb_led.Blue =  floor(map_color[color].Blue * pcent);
-  rvb_led.White = min(min(rvb_led.Blue, rvb_led.Red), rvb_led.Green) >> 1;
-  rvb_led.Red -= rvb_led.White;
-    rvb_led.Green -= rvb_led.White;
-  rvb_led.Blue -= rvb_led.White;
-
-}
+//void  setcolor(rvbw_t &rvb_led, const e_rvb color, const int level)  {
+//  setcolor( (rvb_t&)rvb_led, color, level );
+////  float pcent =  float(level) / 100 ;
+////  rvb_led.Red =   floor(map_color[color].Red * pcent);
+////  rvb_led.Green = floor(map_color[color].Green * pcent);
+////  rvb_led.Blue =  floor(map_color[color].Blue * pcent);
+//  rvb_led.White = min(min(rvb_led.Blue, rvb_led.Red), rvb_led.Green) >> 1;
+//  rvb_led.Red -= rvb_led.White;
+//    rvb_led.Green -= rvb_led.White;
+//  rvb_led.Blue -= rvb_led.White;
+//
+//}
