@@ -3,7 +3,7 @@
 
    (C) net234 Pierre HENRY 03/2021
 
-
+12/003/2020  V1.0
 
 */
 
@@ -31,13 +31,13 @@ enum myEvent  {   evBP0Down = 100,    // BP0 est appuyé
 
 
 
-animLed_t animLed1 ;
-animLed_t animLed2 ;
-animLed_t animLed3 ;
-animLed_t animLed4 ;
-animLed_t animLed5 ;
+animLed_t animLed1(WS2812rvb_t) ;
+animLed_t animLed2(WS2812rvb_t) ;
+animLed_t animLed3(WS2812rvb_t) ;
+animLed_t animLed4(WS2812rvb_t) ;
+animLed_t animLed5(WS2812rvb_t) ;
 
-animLed_t* ledSet[5] {&animLed1, &animLed2, &animLed3, &animLed4, &animLed5 };
+animLed_t* ledSet[5] {animLed1, animLed2, animLed3, animLed4, animLed5 };
 int clockStep = -1;
 
 #include <avr/wdt.h>
