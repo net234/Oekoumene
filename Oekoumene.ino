@@ -112,7 +112,7 @@ void loop() {
         MyEvent.pushDelayEvent(1500 + random(0, 2000), evNewLed);
         int aLed = random(0, 5);
         while (ledSet[aLed]->enable ) aLed = random(0, 5);
-        ledSet[aLed]->set(250, 100, 250, baseColor, 100);
+        ledSet[aLed]->set(250, 50, 250, baseColor, 100);
       }
 
 
@@ -151,7 +151,7 @@ void loop() {
       BP0Multi++;
       Serial.println(F("BP0 Down"));
       baseColor = (e_rvb)(baseColor + 1);
-      if (baseColor == rvb_black) baseColor = rvb_red;
+      if (baseColor == rvb_black) baseColor = rvb_white;
       animLed2.set(200, 10, 200, baseColor, 100);
       break;
 
