@@ -65,7 +65,8 @@ void setup() {
   // Initialisation Hard des IO
   pinMode(LED_LIFE, OUTPUT);
   pinMode(BP0, INPUT_PULLUP);
-
+  pinMode(BPGND, OUTPUT);
+  digitalWrite(BPGND,LOW);
   // Serial
   Serial.begin(115200);
   Serial.println(F(APP_VERSION));
@@ -98,6 +99,18 @@ void loop() {
       animLed4.led.write();
       animLed5.led.write();
       animLed1.led.reset();
+      break;
+
+ 
+
+    case  evNewLed: {
+        MyEvent.pushDelayEvent(10500 + random(0, 2000), evNewLed);
+        int aLed = random(0, 5);
+        while (ledSet[aLed]->enable ) aLed = random(0, 5);
+        ledSet[aLed]->set(250, 50, 250, baseColor, 100);
+      }
+
+   case ev10Hz:  { 
       animLed1.step(MyEvent.currentEvent.param);
       animLed2.step(MyEvent.currentEvent.param);
       animLed3.step(MyEvent.currentEvent.param);
@@ -105,18 +118,9 @@ void loop() {
       animLed5.step(MyEvent.currentEvent.param);
 
 
-      break;
+   //   break;
 
-
-    case  evNewLed: {
-        MyEvent.pushDelayEvent(1500 + random(0, 2000), evNewLed);
-        int aLed = random(0, 5);
-        while (ledSet[aLed]->enable ) aLed = random(0, 5);
-        ledSet[aLed]->set(250, 50, 250, baseColor, 100);
-      }
-
-
-    case ev10Hz: {
+  //  case ev10Hz: 
 
         if ( BP0Down != (digitalRead(BP0) == LOW)) { // changement d'etat BP0
           BP0Down = !BP0Down;

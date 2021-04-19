@@ -24,3 +24,4 @@
 #define LED_ON  HIGH
 
 #define BP0 8  // D8
+#define BPGND 7  // D8
