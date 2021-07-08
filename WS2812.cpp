@@ -72,10 +72,6 @@ void  WS2812rvb_t::write() {
   this->shift(this->Red);
   this->shift(this->Blue);
 }
-//void  WS2812Write(const rvbw_t &color) {
-//  WS2812Write((rvb_t&)color);
-//  WS2812Shift(color.White);
-//}
 
 
 void  rvb_t::setcolor( const e_rvb color, const uint8_t level)  {
@@ -83,15 +79,3 @@ void  rvb_t::setcolor( const e_rvb color, const uint8_t level)  {
   this->Green = (uint16_t)map_color[color].Green * level / 100;
   this->Blue =  (uint16_t)map_color[color].Blue * level / 100;
 }
-//void  setcolor(rvbw_t &rvb_led, const e_rvb color, const int level)  {
-//  setcolor( (rvb_t&)rvb_led, color, level );
-////  float pcent =  float(level) / 100 ;
-////  rvb_led.Red =   floor(map_color[color].Red * pcent);
-////  rvb_led.Green = floor(map_color[color].Green * pcent);
-////  rvb_led.Blue =  floor(map_color[color].Blue * pcent);
-//  rvb_led.White = min(min(rvb_led.Blue, rvb_led.Red), rvb_led.Green) >> 1;
-//  rvb_led.Red -= rvb_led.White;
-//    rvb_led.Green -= rvb_led.White;
-//  rvb_led.Blue -= rvb_led.White;
-//
-//}

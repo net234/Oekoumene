@@ -23,5 +23,5 @@
 #define LED_LIFE  D13
 #define LED_ON  HIGH
 
-#define BP0 8  // D8
-#define BPGND 7  // D8
+#define pinBP0 8 // D2
+#define PIN_WS2812 2 // D8

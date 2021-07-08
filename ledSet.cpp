@@ -14,7 +14,7 @@ void animLed_t::set( const uint16_t delay1, const uint16_t delay2, const uint16_
   this->pos2 = 0;
   this->pos3 = 0;
   this->enable = true;
- D_println(this->enable);
+ //D_println(this->enable);
 }
 
 void  animLed_t::step(uint8_t nstep) {
@@ -26,7 +26,7 @@ void  animLed_t::step() {
   if (this->pos1 < this->delay1) {
     this->pos1++;
     int cLevel = (int)this->level * this->pos1 / this->delay1;
-    this->setcolor(this->color, cLevel);
+    this->led.setcolor(this->color, cLevel);
 
     return;
   }
@@ -39,7 +39,7 @@ void  animLed_t::step() {
     this->pos3++;
     //    D_println(this->pos3);
     int cLevel = (int)this->level - ((int)this->level * this->pos3 / this->delay3);
-    this->setcolor(this->color, cLevel);
+    this->led.setcolor(this->color, cLevel);
     return;
   }
   this->enable = false;
